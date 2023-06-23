@@ -15,6 +15,7 @@ my_fruit_list = p.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dab
 my_fruit_list = my_fruit_list.set_index('Fruit')
 
 # Let's put a pick list here so they can pick the fruit they want to include 
+# Examples are case sensitive, be careful how you spell the fruits in the example
 sl.multiselect("Pick some fruits:", list(my_fruit_list.index),['Avocado','Strawberries'])
 
 # Display the table on the page.
