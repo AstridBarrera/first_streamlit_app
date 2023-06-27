@@ -1,6 +1,7 @@
 import streamlit as sl
 
-sl.title('My Parents New Healthy Diner - by Astrid :)')
+# sl.title('My Parents New Healthy Diner - by Astrid :)')
+sl.title('PUEL TAL PA NURY :)')
 
 sl.header('Breakfast Favorites')
 sl.text(' 🥣 Omega 3 & Blueberry Oatmeal')
