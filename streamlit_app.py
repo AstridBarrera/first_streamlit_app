@@ -25,5 +25,10 @@ sl.dataframe(fruits_to_show) # sl.dataframe(my_fruit_list)
 sl.header('Fruityvice Fruit Advice!')
 
 import requests
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-sl.text(fruityvice_response.json())
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + "kiwi")
+# sl.text(fruityvice_response.json())
+
+# Take the json version of the response and normalize it
+fruityvice_normalized = p.json_normalize(fruityvice_response.json())
+# Shows the list as a table in the screen
+sl.dataframe(fruityvice_normalized)
