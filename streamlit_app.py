@@ -50,7 +50,6 @@ sl.header("The fruit load list contains:")
 # sl.dataframe(my_data_row) # when there are more records than one we have to add a S to tell it there are plural records.
 sl.dataframe(my_data_rows)
 
-# New Section to display fruityvice api response
-sl.header('Fruityvice Fruit Advice!')
+# Adding a second text entry box
 add_my_fruit = sl.text_input('What fruit would you like to add?')
 sl.write('Thanks for adding:', add_my_fruit)
