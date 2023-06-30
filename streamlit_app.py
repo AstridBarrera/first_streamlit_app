@@ -35,4 +35,4 @@ fruityvice_normalized = p.json_normalize(fruityvice_response.json())
 # Shows the list as a table in the screen
 sl.dataframe(fruityvice_normalized)
 
-import snowflake.connector
+# import snowflake.connector
