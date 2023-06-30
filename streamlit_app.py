@@ -32,7 +32,7 @@ sl.dataframe(fruits_to_show) # sl.dataframe(my_fruit_list)
    # sl.text(fruityvice_response.json())
    # Take the json version of the response and normalize it
      fruityvice_normalized = p.json_normalize(fruityvice_response.json())
-     return fruityvice_normalized
+   return fruityvice_normalized
 
 # New Section to display fruityvice api response
 sl.header('Fruityvice Fruit Advice!')
