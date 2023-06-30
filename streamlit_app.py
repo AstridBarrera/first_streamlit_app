@@ -1,4 +1,8 @@
 import streamlit as sl
+import pandas as p
+import requests
+import snowflake.connector
+from urllib.error import URLError 
 
 sl.title('My Parents New Healthy Diner - by Astrid :)')
 
@@ -10,7 +14,7 @@ sl.text(' 🥑🍞 Avocado Toast')
 
 sl.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 
-import pandas as p
+# import pandas as p
 my_fruit_list = p.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 my_fruit_list = my_fruit_list.set_index('Fruit')
 
@@ -27,7 +31,7 @@ fruit_choice = sl.text_input('What fruit would you like information about?', 'Ki
 sl.write('The user entered', fruit_choice)
 
 #New section to make connection with the webpage where the data for fruits is
-import requests
+# import requests
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
 # sl.text(fruityvice_response.json())
 
@@ -36,8 +40,11 @@ fruityvice_normalized = p.json_normalize(fruityvice_response.json())
 # Shows the list as a table in the screen
 sl.dataframe(fruityvice_normalized)
 
+#Don't run anything past here while we troubleshoot
+sl.stop()
+
 # Make a connection with the internal
-import snowflake.connector
+# import snowflake.connector
 my_cnx = snowflake.connector.connect(**sl.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 # my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
@@ -53,3 +60,6 @@ sl.dataframe(my_data_rows)
 # Adding a second text entry box
 add_my_fruit = sl.text_input('What fruit would you like to add?')
 sl.write('Thanks for adding:', add_my_fruit)
+
+#This will not work correctly, but just go with it for now
+my_cur.execute(Insert Into fruit_load_list values ('From Streamlit'))
