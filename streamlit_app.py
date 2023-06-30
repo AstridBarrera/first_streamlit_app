@@ -5,7 +5,6 @@ import snowflake.connector
 from urllib.error import URLError 
 
 sl.title('My Parents New Healthy Diner - by Astrid :)')
-
 sl.header('Breakfast Favorites')
 sl.text(' 🥣 Omega 3 & Blueberry Oatmeal')
 sl.text(' 🥗 Kale, Spinach & Rocket Smoothie')
@@ -27,19 +26,22 @@ sl.dataframe(fruits_to_show) # sl.dataframe(my_fruit_list)
 
 # New Section to display fruityvice api response
 sl.header('Fruityvice Fruit Advice!')
-fruit_choice = sl.text_input('What fruit would you like information about?', 'Kiwi')
-sl.write('The user entered', fruit_choice)
-
-#New section to make connection with the webpage where the data for fruits is
-# import requests
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
-# sl.text(fruityvice_response.json())
-
-# Take the json version of the response and normalize it
-fruityvice_normalized = p.json_normalize(fruityvice_response.json())
-# Shows the list as a table in the screen
-sl.dataframe(fruityvice_normalized)
-
+try:
+  fruit_choice = sl.text_input('What fruit would you like information about?', 'Kiwi')
+  if not fruit_choice:
+    sl.error("Please select a fruit to get information")
+  else
+     # New section to make connection with the webpage where the data for fruits is
+     # import requests
+       fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
+     # sl.text(fruityvice_response.json())
+     # Take the json version of the response and normalize it
+       fruityvice_normalized = p.json_normalize(fruityvice_response.json())
+     # Shows the list as a table in the screen
+       sl.dataframe(fruityvice_normalized)
+except URLError as e:
+  sl.error()
+  
 #Don't run anything past here while we troubleshoot
 sl.stop()
 
