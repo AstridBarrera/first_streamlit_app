@@ -62,4 +62,4 @@ add_my_fruit = sl.text_input('What fruit would you like to add?')
 sl.write('Thanks for adding:', add_my_fruit)
 
 #This will not work correctly, but just go with it for now
-my_cur.execute(Insert Into fruit_load_list values ('From Streamlit'))
+my_cur.execute("Insert Into fruit_load_list values ('From Streamlit')")
