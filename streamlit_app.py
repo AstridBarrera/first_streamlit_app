@@ -26,6 +26,7 @@ sl.header('Fruityvice Fruit Advice!')
 fruit_choice = sl.text_input('What fruit would you like information about?', 'Kiwi')
 sl.write('The user entered', fruit_choice)
 
+#New section to make connection with the webpage where the data for fruits is
 import requests
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
 # sl.text(fruityvice_response.json())
@@ -34,8 +35,9 @@ fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_c
 fruityvice_normalized = p.json_normalize(fruityvice_response.json())
 # Shows the list as a table in the screen
 sl.dataframe(fruityvice_normalized)
-import snowflake.connector
 
+# Make a connection with the internal
+import snowflake.connector
 my_cnx = snowflake.connector.connect(**sl.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 # my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
@@ -47,3 +49,8 @@ my_data_rows = my_cur.fetchall()
 sl.header("The fruit load list contains:")
 # sl.dataframe(my_data_row) # when there are more records than one we have to add a S to tell it there are plural records.
 sl.dataframe(my_data_rows)
+
+# New Section to display fruityvice api response
+sl.header('Fruityvice Fruit Advice!')
+add_my_fruit = sl.text_input('What fruit would you like to add?')
+sl.write('The user entered', add_my_fruit)
