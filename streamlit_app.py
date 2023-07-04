@@ -58,6 +58,7 @@ def get_fruit_load_list():
     my_cur.execute("Select * From fruit_load_list")
     # my_data_row = my_cur.fetchone() #It only fetchs one record
     return my_cur.fetchall()
+    my_cnx.close()
 
 # Adding a second text entry box - Allow the end user to add a fruit to the list
 def insert_row_snowflake(new_fruit):
@@ -72,6 +73,7 @@ if sl.button('Add a Fruit to the list'):
   # sl.dataframe(my_data_row) # when there are more records than one we have to add a S to tell it there are plural records.
   # sl.text(my_data_row)
   back_from_function = insert_row_snowflake(add_my_fruit)
+  my_cnx.close()
   sl.text(back_from_function)
 
 
