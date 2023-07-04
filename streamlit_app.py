@@ -44,25 +44,36 @@ except URLError as e:
   sl.error()
   
 #Don't run anything past here while we troubleshoot
-sl.stop()
+#sl.stop() --For testing
 
 # Make a connection with the internal
 # import snowflake.connector
-my_cnx = snowflake.connector.connect(**sl.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-# my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
-my_cur.execute("Select * From fruit_load_list")
-# my_data_row = my_cur.fetchone() #It only fetchs one record
-my_data_rows = my_cur.fetchall()
+
 # sl.text("The fruit load list contains:")
-# sl.text(my_data_row)
 sl.header("The fruit load list contains:")
-# sl.dataframe(my_data_row) # when there are more records than one we have to add a S to tell it there are plural records.
-sl.dataframe(my_data_rows)
+#Snowflake-related functions
+def get_fruit_load_list():
+  with my_cnx.cursor() as my_cur:
+    # my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
+    my_cur.execute("Select * From fruit_load_list")
+    # my_data_row = my_cur.fetchone() #It only fetchs one record
+    return my_cur.fetchall()
 
-# Adding a second text entry box
+# Adding a second text entry box - Allow the end user to add a fruit to the list
+def insert_row_snowflake(new_fruit):
+  with my_cnx.cursor() as my_cur:
+    my_cur.execute("Insert Into fruit_load_list values ('From Streamlit')")
+    return "Thanks for adding:" + new_fruit
+    
 add_my_fruit = sl.text_input('What fruit would you like to add?')
-sl.write('Thanks for adding:', add_my_fruit)
+#Add a button to load the fruit
+if sl.button('Add a Fruit to the list'):
+  my_cnx = snowflake.connector.connect(**sl.secrets["snowflake"])
+  # sl.dataframe(my_data_row) # when there are more records than one we have to add a S to tell it there are plural records.
+  # sl.text(my_data_row)
+  back_from_function = insert_row_snowflake(add_my_fruit)
+  sl.text(back_from_function)
 
-#This will not work correctly, but just go with it for now
-my_cur.execute("Insert Into fruit_load_list values ('From Streamlit')")
+
+
+
