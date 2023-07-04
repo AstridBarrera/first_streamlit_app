@@ -24,14 +24,6 @@ fruits_to_show = my_fruit_list.loc[fruits_selected]
 # Display the table on the page.
 sl.dataframe(fruits_to_show) # sl.dataframe(my_fruit_list)
 
-# create the repeatable code block (Function) - This part were in the Else and we converted in a function to call
-   def get_fruityvice_data(this_fruit_choice):
-   # New section to make connection with the webpage where the data for fruits is
-     # import requests
-     fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + this_fruit_choice)
-     fruityvice_normalized = p.json_normalize(fruityvice_response.json())
-   return fruityvice_normalized
-
 # New Section to display fruityvice api response
 sl.header('Fruityvice Fruit Advice!')
 try:
@@ -39,9 +31,10 @@ try:
   if not fruit_choice:
     sl.error("Please select a fruit to get information")
   else:
-     back_from_function = get_fruityvice_data(fruit_choice)
-     sl.dataframe(back_from_function)
-     
+     fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
+     fruityvice_normalized = p.json_normalize(fruityvice_response.json())
+     sl.dataframe(fruityvice_normalized)
+    
 except URLError as e:
   sl.error()
   
