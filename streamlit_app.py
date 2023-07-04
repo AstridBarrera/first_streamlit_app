@@ -62,7 +62,7 @@ def get_fruit_load_list():
 # Adding a second text entry box - Allow the end user to add a fruit to the list
 def insert_row_snowflake(new_fruit):
   with my_cnx.cursor() as my_cur:
-    my_cur.execute("Insert Into fruit_load_list values ('" + get_fruityvice_data +"')")
+    my_cur.execute("Insert Into fruit_load_list values ('" + this_fruit_choice +"')")
     return "Thanks for adding:" + new_fruit
     
 add_my_fruit = sl.text_input('What fruit would you like to add?')
