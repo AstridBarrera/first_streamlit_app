@@ -37,11 +37,11 @@ sl.dataframe(fruits_to_show) # sl.dataframe(my_fruit_list)
 # New Section to display fruityvice api response
 sl.header('Fruityvice Fruit Advice!')
 try:
-  fruit_choice = sl.text_input('What fruit would you like information about?', 'Kiwi')
+  fruit_choice = sl.text_input('What fruit would you like information about?')
   if not fruit_choice:
     sl.error("Please select a fruit to get information")
   else:
-     back_from_fuction = get_fruityvice_data(fruit_choice)
+     back_from_function = get_fruityvice_data(fruit_choice)
      # Shows the list as a table in the screen
        #sl.dataframe(fruityvice_normalized)
      sl.dataframe(back_from_fuction)
