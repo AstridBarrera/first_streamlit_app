@@ -50,7 +50,7 @@ except URLError as e:
 # import snowflake.connector
 
 # sl.text("The fruit load list contains:")
-sl.header("The fruit load list contains:")
+sl.header("View Our Fruit List - Add Your Favorites!")
 #Snowflake-related functions
 def get_fruit_load_list():
   with my_cnx.cursor() as my_cur:
@@ -68,7 +68,7 @@ def insert_row_snowflake(new_fruit):
     
 add_my_fruit = sl.text_input('What fruit would you like to add?')
 #Add a button to load the fruit
-if sl.button('Add a Fruit to the list'):
+if sl.button('Get the Fruit list'):
   my_cnx = snowflake.connector.connect(**sl.secrets["snowflake"])
   # sl.dataframe(my_data_row) # when there are more records than one we have to add a S to tell it there are plural records.
   # sl.text(my_data_row)
